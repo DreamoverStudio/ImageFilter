@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-    	id="com.appgyver.plugin.Echo"
+    	id="co_uk.ultimateweb.plugin.ImageFilter"
     	version="1.0.0">
 
     <name>ImageFilter</name>
