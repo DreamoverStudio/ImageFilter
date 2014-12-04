@@ -1,8 +1,7 @@
-package com.plugin.imageFilter;
+package co_uk.ultimateweb.plugin;
 
 import org.json.JSONArray;
-
-import android.util.Log;
+import org.json.JSONException;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -11,7 +10,7 @@ import org.apache.cordova.CallbackContext;
 public class ImageFilter extends CordovaPlugin {
 	
 	@Override
-	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) {
+	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 		boolean result = false;
 		
 		final Filters filters = new Filters();

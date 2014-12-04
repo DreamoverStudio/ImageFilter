@@ -1,7 +1,7 @@
-package com.plugin.imageFilter;
+package co_uk.ultimateweb.plugin;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import android.util.Log;
 import java.io.*;
 import android.net.Uri;
 import android.graphics.Bitmap;
@@ -9,8 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.*;
 import android.os.*;
 
-// CHANGE THIS TO YOUR PROJECT
-import com.plugin.imageFilter.*;
+import co_uk.ultimateweb.plugin.*;
 
 public class Filters{
 	
@@ -32,12 +31,6 @@ public class Filters{
         	
         	if(!path.exists()){
 	            success = path.mkdir();
-	        }
-	        if (!success){ 
-	            Log.d("NONE","Folder not created.");
-	        }
-	        else{
-	            Log.d("NONE","Folder created!");
 	        }
         }
         catch (Exception e){
@@ -98,14 +91,7 @@ public class Filters{
         	
         	if(!path.exists()){
 	            success = path.mkdir();
-	        }
-	        if (!success){ 
-	            Log.d("NONE","Folder not created.");
-	        }
-	        else{
-	            Log.d("NONE","Folder created!");
-	        }
-        	
+	        }        	
         }
         catch (Exception e){
         	e.printStackTrace();
@@ -202,14 +188,6 @@ public class Filters{
         	if(!path.exists()){
 	            success = path.mkdir();
 	        }
-	        if (!success){ 
-	            Log.d("NONE","Folder not created.");
-	        }
-	        else{
-	            Log.d("NONE","Folder created!");
-	        }
-        	
-        	
         }
         catch (Exception e){
         	e.printStackTrace();
@@ -296,14 +274,6 @@ public class Filters{
         	if(!path.exists()){
 	            success = path.mkdir();
 	        }
-	        if (!success){ 
-	            Log.d("NONE","Folder not created.");
-	        }
-	        else{
-	            Log.d("NONE","Folder created!");
-	        }
-        	
-        	
         }
         catch (Exception e){
         	e.printStackTrace();
@@ -374,14 +344,6 @@ public class Filters{
         	if(!path.exists()){
 	            success = path.mkdir();
 	        }
-	        if (!success){ 
-	            Log.d("NONE","Folder not created.");
-	        }
-	        else{
-	            Log.d("NONE","Folder created!");
-	        }
-        	
-        	
         }
         catch (Exception e){
         	e.printStackTrace();
@@ -462,14 +424,6 @@ public class Filters{
         	if(!path.exists()){
 	            success = path.mkdir();
 	        }
-	        if (!success){ 
-	            Log.d("NONE","Folder not created.");
-	        }
-	        else{
-	            Log.d("NONE","Folder created!");
-	        }
-        	
-        	
         }
         catch (Exception e){
         	e.printStackTrace();
