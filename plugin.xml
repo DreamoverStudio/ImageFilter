@@ -18,7 +18,7 @@
   	<!-- android -->
   	<platform name="android">
     	<config-file target="res/xml/config.xml" parent="plugins">
-      		<plugin name="ImageFilter" value="com.appgyver.plugin.ImageFilter"/>
+      		<plugin name="ImageFilter" value="co_uk.ultimateweb.plugin.ImageFilter"/>
     	</config-file>
 
 		<source-file src="src/android/co_uk/ultimateweb/plugin/Filters.java" target-dir="src/co_uk/ultimateweb/plugin/ImageFilter/" />
