@@ -76,7 +76,6 @@ public class Filters{
 			} catch (Exception e) {
 				return e.toString();
 			}
-        return filePath;
 	}
 	public String stark(JSONArray optionsArr) {
 		
@@ -172,7 +171,6 @@ public class Filters{
 			} catch (Exception e) {
 				return e.toString();
 			}
-        return filePath;
 	}
 	public String sunnyside(JSONArray optionsArr) {
 		
@@ -258,7 +256,6 @@ public class Filters{
 			} catch (Exception e) {
 				return e.toString();
 			}
-        return filePath;
 	}
 	public String pinhole(JSONArray optionsArr) {
 		
@@ -328,7 +325,6 @@ public class Filters{
 			} catch (Exception e) {
 				return e.toString();
 			}
-        return filePath;
 	}
 	public String vintage(JSONArray optionsArr) {
 		
@@ -408,7 +404,6 @@ public class Filters{
 			} catch (Exception e) {
 				return e.toString();
 			}
-        return filePath;
 	}
 	public String worn(JSONArray optionsArr) {
 		
@@ -488,7 +483,6 @@ public class Filters{
 			} catch (Exception e) {
 				return e.toString();
 			}
-        return filePath;
 	}
 }
 
