@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-    	id="co_uk.ultimateweb.plugin.ImageFilter"
-    	version="1.0.0">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		id="co.uk.ultimateweb.imagefilter"
+		version="1.0.0">
 
-    <name>ImageFilter</name>
-
-  	<description>
-    	ImageFilter plugin for iOS, forked from https://github.com/DrewDahlman/ImageFilter
-  	</description>
-
-  	<asset src="www/ImageFilter.js" target="plugins/ImageFilter.js" />
-
-  	<engines>
-		<engine name="cordova" version=">=3.0.0"/>
+	<engines>
+		<engine name="cordova" version=">=3.0.0" />
 	</engines>
 
-  	<!-- android -->
-  	<platform name="android">
-    	<config-file target="res/xml/config.xml" parent="plugins">
-      		<plugin name="ImageFilter" value="co_uk.ultimateweb.plugin.ImageFilter"/>
-    	</config-file>
+	<name>ImageFilter</name>
 
-		<source-file src="src/android/co_uk/ultimateweb/plugin/Filters.java" target-dir="src/co_uk/ultimateweb/plugin/ImageFilter/" />
-		<source-file src="src/android/co_uk/ultimateweb/plugin/ImageFilter.java" target-dir="src/co_uk/ultimateweb/plugin/ImageFilter/" />
-  	</platform>
+	<description>
+		ImageFilter plugin for iOS, forked from https://github.com/DrewDahlman/ImageFilter
+	</description>
 
-  	<!-- ios -->  
-  	<platform name="ios">
-    	<config-file target="config.xml" parent="/*/plugins">
-      		<plugin name="ImageFilter" value="ImageFilter" onload="false" />
-    	</config-file>
+	<js-module src="www/ImageFilter.js" name="ImageFilter">
+		<clobbers target="cordova.plugins.imagefilter" />
+	</js-module>
 
-    	<config-file target="config.xml" parent="/widget">
-      		<feature name="ImageFilter">
-        		<param name="ios-package" value="ImageFilter"/>
-        		<param name="onload" value="false" />
-      		</feature>
-    	</config-file>
+	<!-- iOS -->
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="ImageFilter">
+				<param name="ios-package" value="ImageFilter" />
+			</feature>
+		</config-file>
 
-     	<header-file src="src/ios/ImageFilter.h" />
-        <source-file src="src/ios/ImageFilter.m" />
-  </platform>
+		<header-file src="src/ios/ImageFilter.h" />
+		<source-file src="src/ios/ImageFilter.m" />
+	</platform>
+
+	<!-- Android -->
+	<platform name="android">
+		<source-file src="src/android/Filters.java" target-dir="src/co/uk/ultimateweb/imagefilter" />
+		<source-file src="src/android/ImageFilter.java" target-dir="src/co/uk/ultimateweb/imagefilter" />
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="ImageFilter">
+				<param name="android-package" value="co.uk.ultimateweb.imagefilter.ImageFilter" />
+			</feature>
+		</config-file>
+	</platform>
+
 </plugin>

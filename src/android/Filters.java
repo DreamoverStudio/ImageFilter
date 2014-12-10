@@ -1,4 +1,4 @@
-package co_uk.ultimateweb.plugin;
+package co.uk.ultimateweb.imagefilter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.*;
 import android.os.*;
 
-import co_uk.ultimateweb.plugin.*;
+import co.uk.ultimateweb.imagefilter.*;
 
 public class Filters{
 	
@@ -34,7 +34,7 @@ public class Filters{
 	        }
         }
         catch (Exception e){
-        	e.printStackTrace();
+        	return e.toString();
         }
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
@@ -74,7 +74,7 @@ public class Filters{
 		       	return filePath;
 		       	
 			} catch (Exception e) {
-				e.printStackTrace();
+				return e.toString();
 			}
         return filePath;
 	}
@@ -94,7 +94,7 @@ public class Filters{
 	        }        	
         }
         catch (Exception e){
-        	e.printStackTrace();
+			return e.toString();
         }
         
         // GET URL TO IMAGE
@@ -170,7 +170,7 @@ public class Filters{
 		       	
 		       	
 			} catch (Exception e) {
-				e.printStackTrace();
+				return e.toString();
 			}
         return filePath;
 	}
@@ -190,7 +190,7 @@ public class Filters{
 	        }
         }
         catch (Exception e){
-        	e.printStackTrace();
+        	return e.toString();
         }
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
@@ -256,7 +256,7 @@ public class Filters{
 		       	
 		       	
 			} catch (Exception e) {
-				e.printStackTrace();
+				return e.toString();
 			}
         return filePath;
 	}
@@ -276,7 +276,7 @@ public class Filters{
 	        }
         }
         catch (Exception e){
-        	e.printStackTrace();
+        	return e.toString();
         }
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
@@ -326,7 +326,7 @@ public class Filters{
 		       	
 		       	
 			} catch (Exception e) {
-				e.printStackTrace();
+				return e.toString();
 			}
         return filePath;
 	}
@@ -346,7 +346,7 @@ public class Filters{
 	        }
         }
         catch (Exception e){
-        	e.printStackTrace();
+        	return e.toString();
         }
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
@@ -406,7 +406,7 @@ public class Filters{
 		       	
 		       	
 			} catch (Exception e) {
-				e.printStackTrace();
+				return e.toString();
 			}
         return filePath;
 	}
@@ -426,7 +426,7 @@ public class Filters{
 	        }
         }
         catch (Exception e){
-        	e.printStackTrace();
+        	return e.toString();
         }
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
@@ -486,7 +486,7 @@ public class Filters{
 		       	
 		       	
 			} catch (Exception e) {
-				e.printStackTrace();
+				return e.toString();
 			}
         return filePath;
 	}
