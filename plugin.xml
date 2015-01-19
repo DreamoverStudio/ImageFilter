@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		id="co.uk.ultimateweb.imagefilter"
-		version="1.0.0">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="co.uk.ultimateweb.imagefilter"
+    version="1.0.0">
 
-	<engines>
-		<engine name="cordova" version=">=3.0.0" />
-	</engines>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
 
-	<name>ImageFilter</name>
+    <name>ImageFilter</name>
 
-	<description>
-		ImageFilter plugin for iOS, forked from https://github.com/DrewDahlman/ImageFilter
-	</description>
+    <description>ImageFilter plugin for iOS, forked from https://github.com/DrewDahlman/ImageFilter</description>
 
-	<js-module src="www/ImageFilter.js" name="ImageFilter">
-		<clobbers target="cordova.plugins.imagefilter" />
-	</js-module>
+    <js-module src="www/ImageFilter.js" name="ImageFilter">
+        <clobbers target="cordova.plugins.imagefilter" />
+    </js-module>
 
-	<!-- iOS -->
+    <!-- iOS -->
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
 			<feature name="ImageFilter">
@@ -30,16 +28,14 @@
 		<source-file src="src/ios/ImageFilter.m" />
 	</platform>
 
-	<!-- Android -->
-	<platform name="android">
-		<source-file src="src/android/Filters.java" target-dir="src/co/uk/ultimateweb/imagefilter" />
-		<source-file src="src/android/ImageFilter.java" target-dir="src/co/uk/ultimateweb/imagefilter" />
+    <!-- Android -->
+    <platform name="android">
+        <source-file src="src/android/ImageFilter.java" target-dir="src/co/uk/ultimateweb/imagefilter" />
 
-		<config-file target="res/xml/config.xml" parent="/*">
-			<feature name="ImageFilter">
-				<param name="android-package" value="co.uk.ultimateweb.imagefilter.ImageFilter" />
-			</feature>
-		</config-file>
-	</platform>
-
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="ImageFilter">
+                <param name="android-package" value="co.uk.ultimateweb.imagefilter.ImageFilter" />
+            </feature>
+        </config-file>
+    </platform>
 </plugin>
