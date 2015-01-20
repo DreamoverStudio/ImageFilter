@@ -6,6 +6,13 @@ import org.apache.cordova.CallbackContext;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.*;
+import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.*;
+import android.os.*;
 
 import co.uk.ultimateweb.imagefilter.*;
 
