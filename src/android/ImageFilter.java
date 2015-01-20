@@ -87,17 +87,17 @@ public class ImageFilter extends CordovaPlugin {
 						
 					} catch (Exception e) {
 						ignore = true;
-						callbackContext.success("error 4 - " + e.toString());
+						callbackContext.success("error 4 - " + e.toString() + " - " + getStackTrace(e));
 					}
 				}
 				catch (Exception e){
 					ignore = true;
-					callbackContext.success("error 3 - " + e.toString());
+					callbackContext.success("error 3 - " + e.toString() + " - " + getStackTrace(e));
 				}
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString());
+				callbackContext.success("error 2 - " + e.toString() + " - " + getStackTrace(e) + " - " + imageURL);
 			}
 		}
 		
