@@ -1,24 +1,85 @@
-var cordova = require('cordova');
+/*
+Copyright (c) 2012 Drew Dahlman MIT LICENSE
+*/
 
-/**
- * Clipboard plugin for Cordova
- * 
- * @constructor
- */
-function ImageFilter () {}
+var ImageFilter = function () {};
 
-/**
- * Sets the clipboard content
- *
- * @param {String}   text      The content to copy to the clipboard
- * @param {Function} onSuccess The function to call in case of success (takes the copied text as argument)
- * @param {Function} onFail    The function to call in case of error
- */
-ImageFilter.prototype.copy = function (text, onSuccess, onFail) {
-    if (typeof text === "undefined" || text === null) text = "";
-	cordova.exec(onSuccess, onFail, "ImageFilter", "vintage", [text]);
+ImageFilter.prototype.clean = function (done, error, options) {
+	var defaults = {
+        image: '',
+        save: '',
+    };
+    for(var key in defaults) {
+        if(typeof options[key] !== "undefined") defaults[key] = options[key];
+    }
+	
+    return cordova.exec(done, error, "ImageFilter", "clean", [defaults]);
 };
 
-// Register the plugin
-var imagefilter = new ImageFilter();
-module.exports = imagefilter;
+ImageFilter.prototype.none = function (done, error, options) {
+    //console.log(options+" "+done);
+    var defaults = {
+        image: '',
+        save: '',
+    };
+    for(var key in defaults) {
+        if(typeof options[key] !== "undefined") defaults[key] = options[key];
+    }
+
+    return cordova.exec(done,error,"ImageFilter","none",[defaults]);
+};
+
+ImageFilter.prototype.sunnySide = function (done, error, options) {
+    var defaults = {
+        image: '',
+        save: '',
+    };
+    for(var key in defaults) {
+        if(typeof options[key] !== "undefined") defaults[key] = options[key];
+    }
+    return cordova.exec(done, error, "ImageFilter","sunnySide",[defaults]);
+};
+
+ImageFilter.prototype.worn = function (done, error ,options) {
+    var defaults = {
+        image: '',
+        save: '',
+    };
+    for(var key in defaults) {
+        if(typeof options[key] !== "undefined") defaults[key] = options[key];
+    }
+   	return cordova.exec(done,error,"ImageFilter","worn",[defaults]);
+};
+
+ImageFilter.prototype.vintage = function (done,error,options) {
+    var defaults = {
+        image: '',
+        save: '',
+    };
+    for(var key in defaults) {
+        if(typeof options[key] !== "undefined") defaults[key] = options[key];
+    }
+    return cordova.exec(done,error,"ImageFilter","vintage",[defaults]);
+};
+
+ImageFilter.prototype.stark = function (done,error,options) {
+    var defaults = {
+        image: '',
+        save: '',
+    };
+    for(var key in defaults) {
+        if(typeof options[key] !== "undefined") defaults[key] = options[key];
+    }
+    return cordova.exec(done,error,"ImageFilter","stark",[defaults]);
+};
+
+ImageFilter.install = function () {
+  if (!window.plugins) {
+    window.plugins = {};
+  }
+
+  window.plugins.ImageFilter = new ImageFilter();
+  return window.plugins.ImageFilter;
+};
+
+cordova.addConstructor(ImageFilter.install);

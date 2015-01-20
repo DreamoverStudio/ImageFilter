@@ -7,54 +7,52 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.content.Context;
-import android.content.ClipboardManager;
-import android.content.ClipData;
-import android.content.ClipDescription;
+import co.uk.ultimateweb.imagefilter.*;
 
 public class ImageFilter extends CordovaPlugin {
+	@Override
+	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+		boolean result = false;
 
-    private static final String actionCopy = "imagefilter";
-    private static final String actionPaste = "paste";
+		final Filters filters = new Filters();
 
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        ClipboardManager clipboard = (ClipboardManager) cordova.getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+		if(action.equalsIgnoreCase("none")){
+			String fileInfo = filters.none(data);
+			//result = new PluginResult(Status.OK, fileInfo);
 
-        if (action.equals(actionCopy)) {
-            try {
-                String text = args.getString(0);
-                ClipData clip = ClipData.newPlainText("Text", text);
+			result = true;
+			callbackContext.success(fileInfo);
+		}
+		if(action.equalsIgnoreCase("stark")){
+			String fileInfo = filters.stark(data);
+			// result = new PluginResult(Status.OK, fileInfo);
 
-                clipboard.setPrimaryClip(clip);
+			result = true;
+			callbackContext.success(fileInfo);
+		}
+		if(action.equalsIgnoreCase("sunnyside")){
+			String fileInfo = filters.sunnyside(data);
+			//result = new PluginResult(Status.OK, fileInfo);
 
-                callbackContext.success(text);
+			result = true;
+			callbackContext.success(fileInfo);
+		}
 
-                return true;
-            } catch (JSONException e) {
-                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
-            } catch (Exception e) {
-                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, e.toString()));
-            }
-        } else if (action.equals(actionPaste)) {
-            if (!clipboard.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.NO_RESULT));
-            }
+		if(action.equalsIgnoreCase("vintage")){
+			String fileInfo = filters.vintage(data);
+			//result = new PluginResult(Status.OK, fileInfo);
 
-            try {
-                ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
-                String text = item.getText().toString();
+			result = true;
+			callbackContext.success(fileInfo);
+		}
+		if(action.equalsIgnoreCase("worn")){
+			String fileInfo = filters.worn(data);
+			//result = new PluginResult(Status.OK, fileInfo);
 
-                if (text == null) text = "";
+			result = true;
+			callbackContext.success(fileInfo);
+		}
 
-                callbackContext.success(text);
-
-                return true;
-            } catch (Exception e) {
-                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, e.toString()));
-            }
-        }
-
-        return false;
-    }
+		return result;
+	}
 }
