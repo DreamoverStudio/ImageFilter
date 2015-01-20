@@ -23,6 +23,8 @@ public class ImageFilter extends CordovaPlugin {
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
        	File NBBfile = new File(path, "tmp.jpg");
+		Bitmap bmp = ;
+		Bitmap none = ;
         
         // CREATE FOLDERS IF NEEDED
         try{
@@ -51,14 +53,7 @@ public class ImageFilter extends CordovaPlugin {
 				else {
 					bmp = Bitmap.createBitmap(bmp);
 				}
-			}
-			catch (Exception e){
-				ignore = true;
-				callbackContext.success("error 2 - " + e.toString());
-			}
-		
-			
-			if(!ignore) {
+				
 				try{
 					// create image canvas
 					Bitmap none = Bitmap.createBitmap(bmp);
@@ -77,15 +72,7 @@ public class ImageFilter extends CordovaPlugin {
 					paint.setColorFilter(new ColorMatrixColorFilter(cm));
 					Matrix matrix = new Matrix();
 					canvas.drawBitmap(none, matrix, paint);
-				}
-				catch (Exception e){
-					ignore = true;
-					callbackContext.success("error 3 - " + e.toString());
-				}
-			
-			
-				if(!ignore) {
-					// SAVE IMAGE
+					
 					try {
 					
 						// OUTPUT STREAM
@@ -105,6 +92,14 @@ public class ImageFilter extends CordovaPlugin {
 						callbackContext.success("error 4 - " + e.toString());
 					}
 				}
+				catch (Exception e){
+					ignore = true;
+					callbackContext.success("error 3 - " + e.toString());
+				}
+			}
+			catch (Exception e){
+				ignore = true;
+				callbackContext.success("error 2 - " + e.toString());
 			}
 		}
 		
