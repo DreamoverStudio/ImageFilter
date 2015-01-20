@@ -82,7 +82,7 @@ public class Filters{
 		// SET FILE PATH
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
-       	File NBBfile = new File(path, "tmp.jpg");
+       	File NBBfile = new File(path, "tmp_stark.jpg");
         
         // CREATE FOLDERS IF NEEDED
         try{
@@ -177,7 +177,7 @@ public class Filters{
 		// SET FILE PATH
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
-       	File NBBfile = new File(path, "tmp.jpg");
+       	File NBBfile = new File(path, "tmp_sunnyside.jpg");
         
         // CREATE FOLDERS IF NEEDED
         try{
@@ -262,7 +262,7 @@ public class Filters{
 		// SET FILE PATH
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
-       	File NBBfile = new File(path, "tmp.jpg");
+       	File NBBfile = new File(path, "tmp_pinhole.jpg");
         
         // CREATE FOLDERS IF NEEDED
         try{
@@ -331,7 +331,7 @@ public class Filters{
 		// SET FILE PATH
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
-       	File NBBfile = new File(path, "tmp.jpg");
+       	File NBBfile = new File(path, "tmp_vintage.jpg");
         
         // CREATE FOLDERS IF NEEDED
         try{
@@ -410,7 +410,7 @@ public class Filters{
 		// SET FILE PATH
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
-       	File NBBfile = new File(path, "tmp.jpg");
+       	File NBBfile = new File(path, "tmp_worn.jpg");
         
         // CREATE FOLDERS IF NEEDED
         try{
