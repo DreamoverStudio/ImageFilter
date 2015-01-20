@@ -21,7 +21,7 @@ public class ImageFilter extends CordovaPlugin {
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 		boolean ignore = false;
 		String filePath = "";
-		Context context = MyApplication.getAppContext();
+		Context context = this.cordova.getActivity().getApplicationContext();
 		File path = new File(context.getFilesDir()+"/ImageFilter/");
        	File NBBfile = new File(path, "tmp.jpg");
         
