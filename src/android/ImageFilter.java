@@ -38,11 +38,10 @@ public class ImageFilter extends CordovaPlugin {
         }
 		
 		if(!ignore) {
+			final JSONObject options = data.optJSONObject(0);
+			String imageURL = options.optString("image");
         	// GET URL TO IMAGE
 			try{
-				final JSONObject options = data.optJSONObject(0);
-				String imageURL = options.optString("image");
-				
 				// create image bitmap
 				Bitmap bmp = BitmapFactory.decodeFile(imageURL);
 				if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
@@ -97,7 +96,7 @@ public class ImageFilter extends CordovaPlugin {
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + getStackTrace(e));
+				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + " - " + getStackTrace(e));
 			}
 		}
 		
