@@ -13,7 +13,7 @@ public class ImageFilter extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 		
-		callbackContext.success("test - " + data.getString(0) " - " + data.optJSONObject(0).optString("image"));
+		callbackContext.success("test - " + data.getString(0) + " - " + data.optJSONObject(0).optString("image"));
 		return true;
 		
 		boolean result = false;
