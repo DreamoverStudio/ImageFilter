@@ -49,54 +49,55 @@ public class ImageFilter extends CordovaPlugin {
 				ignore = true;
 				callbackContext.success("error 2 - " + e.toString());
 			}
+		}
 			
-			if(!ignore) {
-				try{
-					// create image canvas
-					Bitmap none = Bitmap.createBitmap(bmp);
-					
-					Canvas canvas = new Canvas(none);
-					canvas.drawBitmap(none,0,0,null);
-					
-					Paint paint = new Paint();
-					ColorMatrix cm = new ColorMatrix();
+		if(!ignore) {
+			try{
+				// create image canvas
+				Bitmap none = Bitmap.createBitmap(bmp);
 				
-					cm.set(new float[] { 
-							1, 0, 0, 0, -60, 
-							0, 1, 0, 0, -60, 
-							0, 0, 1, 0, -60, 
-							0, 0, 0, 1, 0 });
-					paint.setColorFilter(new ColorMatrixColorFilter(cm));
-					Matrix matrix = new Matrix();
-					canvas.drawBitmap(none, matrix, paint);
-				}
-				catch (Exception e){
-					ignore = true;
-					callbackContext.success("error 3 - " + e.toString());
-				}
-			}
+				Canvas canvas = new Canvas(none);
+				canvas.drawBitmap(none,0,0,null);
+				
+				Paint paint = new Paint();
+				ColorMatrix cm = new ColorMatrix();
 			
-			if(!ignore) {
-				// SAVE IMAGE
-				try {
-				
-					// OUTPUT STREAM
-					FileOutputStream out = new FileOutputStream(NBBfile);
-					none.compress(Bitmap.CompressFormat.JPEG, 100, out);
-					
-					// GET FILE PATH
-					Uri uri = Uri.fromFile(NBBfile);
-					filePath = uri.toString();
-					
-					// RETURN FILE PATH
-					callbackContext.success("success = " + filePath);
-					
-					
-				} catch (Exception e) {
-					ignore = true;
-					callbackContext.success("error 4 - " + e.toString());
-				}
+				cm.set(new float[] { 
+						1, 0, 0, 0, -60, 
+						0, 1, 0, 0, -60, 
+						0, 0, 1, 0, -60, 
+						0, 0, 0, 1, 0 });
+				paint.setColorFilter(new ColorMatrixColorFilter(cm));
+				Matrix matrix = new Matrix();
+				canvas.drawBitmap(none, matrix, paint);
 			}
+			catch (Exception e){
+				ignore = true;
+				callbackContext.success("error 3 - " + e.toString());
+			}
+		}
+			
+		if(!ignore) {
+			// SAVE IMAGE
+			try {
+			
+				// OUTPUT STREAM
+				FileOutputStream out = new FileOutputStream(NBBfile);
+				none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+				
+				// GET FILE PATH
+				Uri uri = Uri.fromFile(NBBfile);
+				filePath = uri.toString();
+				
+				// RETURN FILE PATH
+				callbackContext.success("success = " + filePath);
+				
+				
+			} catch (Exception e) {
+				ignore = true;
+				callbackContext.success("error 4 - " + e.toString());
+			}
+		}
 		
 		return true;
 		
