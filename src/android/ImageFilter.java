@@ -23,8 +23,6 @@ public class ImageFilter extends CordovaPlugin {
 		String filePath = "";
 		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
        	File NBBfile = new File(path, "tmp.jpg");
-		Bitmap bmp = ;
-		Bitmap none = ;
         
         // CREATE FOLDERS IF NEEDED
         try{
