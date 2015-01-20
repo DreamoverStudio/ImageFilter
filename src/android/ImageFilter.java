@@ -97,7 +97,7 @@ public class ImageFilter extends CordovaPlugin {
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + getStackTrace(e) + " - " + imageURL);
+				callbackContext.success("error 2 - " + e.toString() + " - " + getStackTrace(e));
 			}
 		}
 		
@@ -145,5 +145,12 @@ public class ImageFilter extends CordovaPlugin {
 		}
 
 		return result;*/
+	}
+	
+	public static String getStackTrace(final Throwable throwable) {
+		final StringWriter sw = new StringWriter();
+		final PrintWriter pw = new PrintWriter(sw, true);
+		throwable.printStackTrace(pw);
+		return sw.getBuffer().toString();
 	}
 }
