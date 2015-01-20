@@ -12,8 +12,92 @@ import co.uk.ultimateweb.imagefilter.*;
 public class ImageFilter extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+		boolean ignore = false;
+		String filePath = "";
+		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+       	File NBBfile = new File(path, "tmp.jpg");
+        
+        // CREATE FOLDERS IF NEEDED
+        try{
+        	boolean success = false;
+        	
+        	if(!path.exists()){
+	            success = path.mkdir();
+	        }
+        }
+        catch (Exception e){
+			ignore = true;
+        	callbackContext.success("error 1 - " + e.toString());
+        }
 		
-		callbackContext.success("test - " + data.getString(0) + " - " + data.optJSONObject(0).optString("image"));
+		if(!ignore) {
+        	// GET URL TO IMAGE
+			try{
+				final JSONObject options = optionsArr.optJSONObject(0);
+				String imageURL = options.optString("image");
+				
+				// create image bitmap
+				Bitmap bmp = BitmapFactory.decodeFile(imageURL);
+				if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+					bmp = Bitmap.createBitmap(bmp,0,0,655,655);
+				}
+				else {
+					bmp = Bitmap.createBitmap(bmp);
+				}
+			}
+			catch (Exception e){
+				ignore = true;
+				callbackContext.success("error 2 - " + e.toString());
+			}
+			
+			if(!ignore) {
+				try{
+					// create image canvas
+					Bitmap none = Bitmap.createBitmap(bmp);
+					
+					Canvas canvas = new Canvas(none);
+					canvas.drawBitmap(none,0,0,null);
+					
+					Paint paint = new Paint();
+					ColorMatrix cm = new ColorMatrix();
+				
+					cm.set(new float[] { 
+							1, 0, 0, 0, -60, 
+							0, 1, 0, 0, -60, 
+							0, 0, 1, 0, -60, 
+							0, 0, 0, 1, 0 });
+					paint.setColorFilter(new ColorMatrixColorFilter(cm));
+					Matrix matrix = new Matrix();
+					canvas.drawBitmap(none, matrix, paint);
+				}
+				catch (Exception e){
+					ignore = true;
+					callbackContext.success("error 3 - " + e.toString());
+				}
+			}
+			
+			if(!ignore) {
+				// SAVE IMAGE
+				try {
+				
+					// OUTPUT STREAM
+					FileOutputStream out = new FileOutputStream(NBBfile);
+					none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+					
+					// GET FILE PATH
+					Uri uri = Uri.fromFile(NBBfile);
+					filePath = uri.toString();
+					
+					// RETURN FILE PATH
+					callbackContext.success("success = " + filePath);
+					
+					
+				} catch (Exception e) {
+					ignore = true;
+					callbackContext.success("error 4 - " + e.toString());
+				}
+			}
+		
 		return true;
 		
 		/*boolean result = false;
