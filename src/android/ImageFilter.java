@@ -21,7 +21,7 @@ public class ImageFilter extends CordovaPlugin {
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 		boolean ignore = false;
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File(Environment.getDataDirectory()+"/ImageFilter/");
        	File NBBfile = new File(path, "tmp.jpg");
         
         // CREATE FOLDERS IF NEEDED
@@ -96,7 +96,7 @@ public class ImageFilter extends CordovaPlugin {
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + " - " + getStackTrace(e));
+				callbackContext.success("error 2 - " + e.toString() + " - " + Environment.getDataDirectory() + " - " + getStackTrace(e));
 			}
 		}
 		
