@@ -16,7 +16,7 @@ public class ImageFilter extends CordovaPlugin {
 		callbackContext.success("test - " + data.getString(0) + " - " + data.optJSONObject(0).optString("image"));
 		return true;
 		
-		boolean result = false;
+		/*boolean result = false;
 
 		final Filters filters = new Filters();
 
@@ -57,6 +57,6 @@ public class ImageFilter extends CordovaPlugin {
 			callbackContext.success(fileInfo);
 		}
 
-		return result;
+		return result;*/
 	}
 }
