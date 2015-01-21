@@ -41,11 +41,13 @@ public class ImageFilter extends CordovaPlugin {
 		
 		if(!ignore) {
 			final JSONObject options = data.optJSONObject(0);
-			String imageURL = options.optString("image");
+			//new File(getFilesDir(), "test.png").getAbsolutePath();
+			String imageURL = new File(context.getFilesDir().getPath()+"/user/", options.optString("image")).getAbsolutePath();
         	// GET URL TO IMAGE
 			try{
 				// create image bitmap
 				Bitmap bmp = BitmapFactory.decodeFile(imageURL);
+				//
 				//might need to run a test here
 				if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 					bmp = Bitmap.createBitmap(bmp,0,0,655,655);
@@ -86,22 +88,22 @@ public class ImageFilter extends CordovaPlugin {
 						filePath = uri.toString();
 						
 						// RETURN FILE PATH
-						callbackContext.success("success = " + filePath);
+						callbackContext.success("success = " + imageURL + ' - ' + filePath + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight());
 						
 						
 					} catch (Exception e) {
 						ignore = true;
-						callbackContext.success("error 4 - " + e.toString() + " - " + getStackTrace(e));
+						callbackContext.success("error 4 - " + imageURL + " - " + e.toString() + " - " + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight() + getStackTrace(e));
 					}
 				}
 				catch (Exception e){
 					ignore = true;
-					callbackContext.success("error 3 - " + e.toString() + " - " + getStackTrace(e));
+					callbackContext.success("error 3 - " + e.toString() + " - " + imageURL + " - " + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight() + getStackTrace(e));
 				}
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + getStackTrace(e));
+				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + " - " + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight() + getStackTrace(e));
 			}
 		}
 		
