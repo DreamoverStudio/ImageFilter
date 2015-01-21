@@ -23,7 +23,7 @@ public class ImageFilter extends CordovaPlugin {
 		boolean ignore = false;
 		String filePath = "";
 		Context context = this.cordova.getActivity().getApplicationContext();
-		File path = new File(context.getFilesDir()+"/ImageFilter/");
+		File path = new File(context.getFilesDir()+"/user/ImageFilter/");
        	File NBBfile = new File(path, "tmp.jpg");
         
         // CREATE FOLDERS IF NEEDED
@@ -98,7 +98,7 @@ public class ImageFilter extends CordovaPlugin {
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + context.getFilesDir() + " - " + getStackTrace(e));
+				callbackContext.success("error 2 - " + e.toString() + " - " + getStackTrace(e));
 			}
 		}
 		
