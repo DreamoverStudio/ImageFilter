@@ -23,7 +23,7 @@ public class ImageFilter extends CordovaPlugin {
 		boolean ignore = false;
 		String filePath = "";
 		Context context = this.cordova.getActivity().getApplicationContext();
-		File path = new File(context.getFilesDir()+"/user/ImageFilter/");
+		File path = new File(context.getFilesDir()+"/user/");
        	File NBBfile = new File(path, "tmp.jpg");
         
         // CREATE FOLDERS IF NEEDED
