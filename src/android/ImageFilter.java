@@ -23,7 +23,7 @@ public class ImageFilter extends CordovaPlugin {
 		boolean ignore = false;
 		String filePath = "";
 		Context context = this.cordova.getActivity().getApplicationContext();
-		File path = new File(context.getFilesDir()+"/user/");
+		File path = new File(context.getFilesDir().getPath()+"/user/");
        	File NBBfile = new File(path, "tmp.jpg");
         
         // CREATE FOLDERS IF NEEDED
@@ -46,6 +46,7 @@ public class ImageFilter extends CordovaPlugin {
 			try{
 				// create image bitmap
 				Bitmap bmp = BitmapFactory.decodeFile(imageURL);
+				//might need to run a test here
 				if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 					bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 				}
@@ -77,6 +78,8 @@ public class ImageFilter extends CordovaPlugin {
 						// OUTPUT STREAM
 						FileOutputStream out = new FileOutputStream(NBBfile);
 						none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+						out.flush(); //new
+           				out.close(); //new
 						
 						// GET FILE PATH
 						Uri uri = Uri.fromFile(NBBfile);
