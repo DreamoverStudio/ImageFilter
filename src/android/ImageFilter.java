@@ -6,111 +6,13 @@ import org.apache.cordova.CallbackContext;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.*;
-import android.net.Uri;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.*;
-import android.os.*;
-import android.content.Context;
 
 import co.uk.ultimateweb.imagefilter.*;
 
 public class ImageFilter extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-		boolean ignore = false;
-		String filePath = "";
-		Context context = this.cordova.getActivity().getApplicationContext();
-		//the below is bad but if it works that'll do for now
-		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
-       	File NBBfile = new File(path, "tmp.jpg");
-        
-        // CREATE FOLDERS IF NEEDED
-        try{
-        	boolean success = false;
-        	
-        	if(!path.exists()){
-	            success = path.mkdir();
-	        }
-        }
-        catch (Exception e){
-			ignore = true;
-        	callbackContext.success("error 1 - " + e.toString());
-        }
-		
-		if(!ignore) {
-			final JSONObject options = data.optJSONObject(0);
-			//new File(getFilesDir(), "test.png").getAbsolutePath();
-			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
-        	// GET URL TO IMAGE
-			try{
-				// create image bitmap
-				Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-				//
-				//might need to run a test here
-				if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
-					bmp = Bitmap.createBitmap(bmp,0,0,655,655);
-				}
-				else {
-					bmp = Bitmap.createBitmap(bmp);
-				}
-				
-				try{
-					// create image canvas
-					Bitmap none = Bitmap.createBitmap(bmp);
-					
-					Canvas canvas = new Canvas(none);
-					canvas.drawBitmap(none,0,0,null);
-					
-					Paint paint = new Paint();
-					ColorMatrix cm = new ColorMatrix();
-				
-					cm.set(new float[] { 
-							1, 0, 0, 0, -60, 
-							0, 1, 0, 0, -60, 
-							0, 0, 1, 0, -60, 
-							0, 0, 0, 1, 0 });
-					paint.setColorFilter(new ColorMatrixColorFilter(cm));
-					Matrix matrix = new Matrix();
-					canvas.drawBitmap(none, matrix, paint);
-					
-					try {
-					
-						// OUTPUT STREAM
-						FileOutputStream out = new FileOutputStream(NBBfile);
-						none.compress(Bitmap.CompressFormat.JPEG, 100, out);
-						out.flush(); //new
-           				out.close(); //new
-						
-						// GET FILE PATH
-						Uri uri = Uri.fromFile(NBBfile);
-						filePath = uri.toString();
-						
-						// RETURN FILE PATH
-						callbackContext.success("success = " + imageURL + " - " + filePath + " w: " + bmp.getWidth() + " h: " + bmp.getHeight());
-						
-						
-					} catch (Exception e) {
-						ignore = true;
-						callbackContext.success("error 4 - " + imageURL + " - " + e.toString() + " - " + " w: " + bmp.getWidth() + " h: " + bmp.getHeight() + getStackTrace(e));
-					}
-				}
-				catch (Exception e){
-					ignore = true;
-					callbackContext.success("error 3 - " + e.toString() + " - " + imageURL + " - " + " w: " + bmp.getWidth() + " h: " + bmp.getHeight() + getStackTrace(e));
-				}
-			}
-			catch (Exception e){
-				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + getStackTrace(e));
-			}
-		}
-		
-		return true;
-		
-		/*boolean result = false;
+		boolean result = false;
 
 		final Filters filters = new Filters();
 
@@ -151,13 +53,6 @@ public class ImageFilter extends CordovaPlugin {
 			callbackContext.success(fileInfo);
 		}
 
-		return result;*/
-	}
-	
-	public static String getStackTrace(final Throwable throwable) {
-		final StringWriter sw = new StringWriter();
-		final PrintWriter pw = new PrintWriter(sw, true);
-		throwable.printStackTrace(pw);
-		return sw.getBuffer().toString();
+		return result;
 	}
 }

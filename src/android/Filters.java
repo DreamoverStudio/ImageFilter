@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.*;
 import android.os.*;
+import android.content.Context;
 
 import co.uk.ultimateweb.imagefilter.*;
 
@@ -19,14 +20,15 @@ public class Filters{
 		/*
 		Be sure to change your storage directory here it is set to ImageFilter
 		*/
+		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
 		
 		// TMP.jpg is where we store our temporary version of the image
        	File NBBfile = new File(path, "tmp.jpg");
         
         // CREATE FOLDERS IF NEEDED
-        try{
+        /*try{
         	boolean success = false;
         	
         	if(!path.exists()){
@@ -35,10 +37,10 @@ public class Filters{
         }
         catch (Exception e){
         	return e.toString();
-        }
+        }*/
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
-			String imageURL = options.optString("image");
+			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
 			
 			// APPLY FILTER
 			/*
@@ -48,12 +50,12 @@ public class Filters{
 			
 			// create image bitmap
 			Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-			if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+			/*if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 				bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 			}
-			else {
+			else {*/
 				bmp = Bitmap.createBitmap(bmp);
-			}
+			//}
 			
 			// create image canvas
 			Canvas canvas = new Canvas(bmp);
@@ -65,6 +67,8 @@ public class Filters{
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
 		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+				out.flush();
+           		out.close();
 		       	
 		       	// GET FILE PATH
 		       	Uri uri = Uri.fromFile(NBBfile);
@@ -80,12 +84,13 @@ public class Filters{
 	public String stark(JSONArray optionsArr) {
 		
 		// SET FILE PATH
+		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_stark.jpg");
         
         // CREATE FOLDERS IF NEEDED
-        try{
+        /*try{
         	boolean success = false;
         	
         	if(!path.exists()){
@@ -94,23 +99,23 @@ public class Filters{
         }
         catch (Exception e){
 			return e.toString();
-        }
+        }*/
         
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
-			String imageURL = options.optString("image");
+			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
 			
 			// APPLY FILTER
 			
 			
 			// create image bitmap
 			Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-			if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+			/*if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 				bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 			}
-			else {
+			else {*/
 				bmp = Bitmap.createBitmap(bmp);
-			}
+			//}
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
@@ -159,6 +164,8 @@ public class Filters{
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
 		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+				out.flush();
+           		out.close();
 		       	
 		       	// GET FILE PATH
 		       	Uri uri = Uri.fromFile(NBBfile);
@@ -175,12 +182,13 @@ public class Filters{
 	public String sunnyside(JSONArray optionsArr) {
 		
 		// SET FILE PATH
+		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_sunnyside.jpg");
         
         // CREATE FOLDERS IF NEEDED
-        try{
+       /* try{
         	boolean success = false;
         	
         	if(!path.exists()){
@@ -189,22 +197,22 @@ public class Filters{
         }
         catch (Exception e){
         	return e.toString();
-        }
+        }*/
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
-			String imageURL = options.optString("image");
+			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
 			
 			// APPLY FILTER
 			
 			
 			// create image bitmap
 			Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-			if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+			/*if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 				bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 			}
-			else {
+			else {*/
 				bmp = Bitmap.createBitmap(bmp);
-			}
+			//}
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
@@ -244,7 +252,9 @@ public class Filters{
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
 		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
-		       	
+		       	out.flush();
+           		out.close();
+				
 		       	// GET FILE PATH
 		       	Uri uri = Uri.fromFile(NBBfile);
 		       	filePath = uri.toString();
@@ -260,12 +270,13 @@ public class Filters{
 	public String pinhole(JSONArray optionsArr) {
 		
 		// SET FILE PATH
+		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_pinhole.jpg");
         
         // CREATE FOLDERS IF NEEDED
-        try{
+        /*try{
         	boolean success = false;
         	
         	if(!path.exists()){
@@ -274,22 +285,22 @@ public class Filters{
         }
         catch (Exception e){
         	return e.toString();
-        }
+        }*/
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
-			String imageURL = options.optString("image");
+			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
 			
 			// APPLY FILTER
 			
 			
 			// create image bitmap
 			Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-			if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+			/*if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 				bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 			}
-			else {
+			else {*/
 				bmp = Bitmap.createBitmap(bmp);
-			}
+			//}
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
@@ -313,6 +324,8 @@ public class Filters{
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
 		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+				out.flush();
+           		out.close();
 		       	
 		       	// GET FILE PATH
 		       	Uri uri = Uri.fromFile(NBBfile);
@@ -329,12 +342,13 @@ public class Filters{
 	public String vintage(JSONArray optionsArr) {
 		
 		// SET FILE PATH
+		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_vintage.jpg");
         
         // CREATE FOLDERS IF NEEDED
-        try{
+        /*try{
         	boolean success = false;
         	
         	if(!path.exists()){
@@ -343,22 +357,22 @@ public class Filters{
         }
         catch (Exception e){
         	return e.toString();
-        }
+        }*/
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
-			String imageURL = options.optString("image");
+			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
 			
 			// APPLY FILTER
 			
 			
 			// create image bitmap
 			Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-			if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+			/*if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 				bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 			}
-			else {
+			else {*/
 				bmp = Bitmap.createBitmap(bmp);
-			}
+			//}
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
@@ -392,7 +406,9 @@ public class Filters{
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
 		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
-		       	
+		       	out.flush();
+           		out.close();
+				
 		       	// GET FILE PATH
 		       	Uri uri = Uri.fromFile(NBBfile);
 		       	filePath = uri.toString();
@@ -408,12 +424,13 @@ public class Filters{
 	public String worn(JSONArray optionsArr) {
 		
 		// SET FILE PATH
+		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
-		File path = new File(Environment.getExternalStorageDirectory()+"/ImageFilter/");
+		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_worn.jpg");
         
         // CREATE FOLDERS IF NEEDED
-        try{
+        /*try{
         	boolean success = false;
         	
         	if(!path.exists()){
@@ -422,22 +439,22 @@ public class Filters{
         }
         catch (Exception e){
         	return e.toString();
-        }
+        }*/
         // GET URL TO IMAGE
         	final JSONObject options = optionsArr.optJSONObject(0);
-			String imageURL = options.optString("image");
+			String imageURL = new File(path, options.optString("image")).getAbsolutePath();
 			
 			// APPLY FILTER
 			
 			
 			// create image bitmap
 			Bitmap bmp = BitmapFactory.decodeFile(imageURL);
-			if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
+			/*if(bmp.getHeight() >= 655 || bmp.getWidth()>=655){
 				bmp = Bitmap.createBitmap(bmp,0,0,655,655);
 			}
-			else {
+			else {*/
 				bmp = Bitmap.createBitmap(bmp);
-			}
+			//}
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
@@ -471,7 +488,9 @@ public class Filters{
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
 		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
-		       	
+		       	out.flush();
+           		out.close();
+				
 		       	// GET FILE PATH
 		       	Uri uri = Uri.fromFile(NBBfile);
 		       	filePath = uri.toString();
