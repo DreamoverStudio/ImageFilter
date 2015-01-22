@@ -8,19 +8,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.*;
 import android.os.*;
-import android.content.Context;
 
 import co.uk.ultimateweb.imagefilter.*;
 
 public class Filters{
 	
-	public String none(JSONArray optionsArr) {
+	public String none(Context context, JSONArray optionsArr) {
 		
 		// SET FILE PATH
 		/*
 		Be sure to change your storage directory here it is set to ImageFilter
 		*/
-		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
 		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
 		
@@ -81,10 +79,9 @@ public class Filters{
 				return e.toString();
 			}
 	}
-	public String stark(JSONArray optionsArr) {
+	public String stark(Context context, JSONArray optionsArr) {
 		
 		// SET FILE PATH
-		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
 		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_stark.jpg");
@@ -179,10 +176,9 @@ public class Filters{
 				return e.toString();
 			}
 	}
-	public String sunnyside(JSONArray optionsArr) {
+	public String sunnyside(Context context, JSONArray optionsArr) {
 		
 		// SET FILE PATH
-		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
 		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_sunnyside.jpg");
@@ -267,10 +263,9 @@ public class Filters{
 				return e.toString();
 			}
 	}
-	public String pinhole(JSONArray optionsArr) {
+	public String pinhole(Context context, JSONArray optionsArr) {
 		
 		// SET FILE PATH
-		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
 		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_pinhole.jpg");
@@ -339,10 +334,9 @@ public class Filters{
 				return e.toString();
 			}
 	}
-	public String vintage(JSONArray optionsArr) {
+	public String vintage(Context context, JSONArray optionsArr) {
 		
 		// SET FILE PATH
-		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
 		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_vintage.jpg");
@@ -421,10 +415,9 @@ public class Filters{
 				return e.toString();
 			}
 	}
-	public String worn(JSONArray optionsArr) {
+	public String worn(Context context, JSONArray optionsArr) {
 		
 		// SET FILE PATH
-		Context context = this.cordova.getActivity().getApplicationContext();
 		String filePath = "";
 		File path = new File("/storage/emulated/0/Android" + context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp_worn.jpg");
