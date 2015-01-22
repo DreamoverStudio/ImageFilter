@@ -103,7 +103,7 @@ public class ImageFilter extends CordovaPlugin {
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + " - " + " w: " + bmp.getWidth() + " h: " + bmp.getHeight() + getStackTrace(e));
+				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + getStackTrace(e));
 			}
 		}
 		
