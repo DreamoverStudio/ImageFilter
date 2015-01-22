@@ -88,22 +88,22 @@ public class ImageFilter extends CordovaPlugin {
 						filePath = uri.toString();
 						
 						// RETURN FILE PATH
-						callbackContext.success("success = " + imageURL + ' - ' + filePath + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight());
+						callbackContext.success("success = " + imageURL + " - " + filePath + " w: " + bmp.getWidth() + " h: " + bmp.getHeight());
 						
 						
 					} catch (Exception e) {
 						ignore = true;
-						callbackContext.success("error 4 - " + imageURL + " - " + e.toString() + " - " + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight() + getStackTrace(e));
+						callbackContext.success("error 4 - " + imageURL + " - " + e.toString() + " - " + " w: " + bmp.getWidth() + " h: " + bmp.getHeight() + getStackTrace(e));
 					}
 				}
 				catch (Exception e){
 					ignore = true;
-					callbackContext.success("error 3 - " + e.toString() + " - " + imageURL + " - " + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight() + getStackTrace(e));
+					callbackContext.success("error 3 - " + e.toString() + " - " + imageURL + " - " + " w: " + bmp.getWidth() + " h: " + bmp.getHeight() + getStackTrace(e));
 				}
 			}
 			catch (Exception e){
 				ignore = true;
-				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + " - " + ' w: ' + bmp.getWidth() + ' h: ' + bmp.getHeight() + getStackTrace(e));
+				callbackContext.success("error 2 - " + e.toString() + " - " + imageURL + " - " + " w: " + bmp.getWidth() + " h: " + bmp.getHeight() + getStackTrace(e));
 			}
 		}
 		
