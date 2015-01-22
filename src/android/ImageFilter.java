@@ -23,7 +23,7 @@ public class ImageFilter extends CordovaPlugin {
 		boolean ignore = false;
 		String filePath = "";
 		Context context = this.cordova.getActivity().getApplicationContext();
-		File path = new File(context.getFilesDir().getPath()+"/user/");
+		File path = new File(context.getFilesDir().getPath().replace("data/data","data")+"/user/");
        	File NBBfile = new File(path, "tmp.jpg");
         
         // CREATE FOLDERS IF NEEDED
@@ -42,7 +42,7 @@ public class ImageFilter extends CordovaPlugin {
 		if(!ignore) {
 			final JSONObject options = data.optJSONObject(0);
 			//new File(getFilesDir(), "test.png").getAbsolutePath();
-			String imageURL = new File(context.getFilesDir().getPath()+"/user/", options.optString("image")).getAbsolutePath();
+			String imageURL = new File(context.getFilesDir().getPath().replace("data/data","data") +"/user/", options.optString("image")).getAbsolutePath();
         	// GET URL TO IMAGE
 			try{
 				// create image bitmap
