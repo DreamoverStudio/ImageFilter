@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.*;
 import android.os.*;
+import android.content.Context;
 
 import co.uk.ultimateweb.imagefilter.*;
 
