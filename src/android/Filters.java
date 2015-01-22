@@ -59,13 +59,15 @@ public class Filters{
 			// create image canvas
 			Canvas canvas = new Canvas(bmp);
 			Bitmap none = Bitmap.createBitmap(bmp);
-			canvas.drawBitmap(none,0,0,null);
+			Bitmap mutableBitmap = none.copy(Bitmap.Config.ARGB_8888, true);
+
+			canvas.drawBitmap(mutableBitmap,0,0,null);
 			
 			// SAVE IMAGE
 			try {
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
-		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		       	mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 				out.flush();
            		out.close();
 		       	
@@ -117,9 +119,10 @@ public class Filters{
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
+			Bitmap mutableBitmap = none.copy(Bitmap.Config.ARGB_8888, true);
 			
-			Canvas canvas = new Canvas(none);
-			canvas.drawBitmap(none,0,0,null);
+			Canvas canvas = new Canvas(mutableBitmap);
+			canvas.drawBitmap(mutableBitmap,0,0,null);
 			
 			// BORDER
 			//Context context = MyApplication.getAppContext();
@@ -141,7 +144,7 @@ public class Filters{
 		
 		    spaint.setColorFilter(new ColorMatrixColorFilter(scm));
 		    Matrix smatrix = new Matrix();
-		    canvas.drawBitmap(none, smatrix, spaint);
+		    canvas.drawBitmap(mutableBitmap, smatrix, spaint);
 		    
 		    Paint paint = new Paint();
 		    ColorMatrix cm = new ColorMatrix();
@@ -153,7 +156,7 @@ public class Filters{
 		            0, 0, 0, 1, 0 });
 		    paint.setColorFilter(new ColorMatrixColorFilter(cm));
 		    Matrix matrix = new Matrix();
-		    canvas.drawBitmap(none, matrix, paint);
+		    canvas.drawBitmap(mutableBitmap, matrix, paint);
 			
 			
 			// SAVE IMAGE
@@ -161,7 +164,7 @@ public class Filters{
 			
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
-		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		       	mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 				out.flush();
            		out.close();
 		       	
@@ -213,9 +216,10 @@ public class Filters{
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
+			Bitmap mutableBitmap = none.copy(Bitmap.Config.ARGB_8888, true);
 			
-			Canvas canvas = new Canvas(none);
-			canvas.drawBitmap(none,0,0,null);
+			Canvas canvas = new Canvas(mutableBitmap);
+			canvas.drawBitmap(mutableBitmap,0,0,null);
 			
 			
 			/*Bitmap color = boost(none,1,1);
@@ -233,7 +237,7 @@ public class Filters{
 		            0, 0, 0, 1, 0 });
 		    paint.setColorFilter(new ColorMatrixColorFilter(cm));
 		    Matrix matrix = new Matrix();
-		    canvas.drawBitmap(none, matrix, paint);
+		    canvas.drawBitmap(mutableBitmap, matrix, paint);
 		    
 		    // BORDER
 		    
@@ -248,7 +252,7 @@ public class Filters{
 			
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
-		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		       	mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 		       	out.flush();
            		out.close();
 				
@@ -300,9 +304,10 @@ public class Filters{
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
+			Bitmap mutableBitmap = none.copy(Bitmap.Config.ARGB_8888, true);
 			
-			Canvas canvas = new Canvas(none);
-			canvas.drawBitmap(none,0,0,null);
+			Canvas canvas = new Canvas(mutableBitmap);
+			canvas.drawBitmap(mutableBitmap,0,0,null);
 			
 			
 		    
@@ -319,7 +324,7 @@ public class Filters{
 			
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
-		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		       	mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 				out.flush();
            		out.close();
 		       	
@@ -371,9 +376,10 @@ public class Filters{
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
+			Bitmap mutableBitmap = none.copy(Bitmap.Config.ARGB_8888, true);
 			
-			Canvas canvas = new Canvas(none);
-			canvas.drawBitmap(none,0,0,null);
+			Canvas canvas = new Canvas(mutableBitmap);
+			canvas.drawBitmap(mutableBitmap,0,0,null);
 			
 			Paint paint = new Paint();
 		    ColorMatrix cm = new ColorMatrix();
@@ -385,7 +391,7 @@ public class Filters{
 		            0, 0, 0, 1, 0 });
 		    paint.setColorFilter(new ColorMatrixColorFilter(cm));
 		    Matrix matrix = new Matrix();
-		    canvas.drawBitmap(none, matrix, paint);
+		    canvas.drawBitmap(mutableBitmap, matrix, paint);
 		    
 		    // BORDER
 		    
@@ -400,7 +406,7 @@ public class Filters{
 			
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
-		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		       	mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 		       	out.flush();
            		out.close();
 				
@@ -452,9 +458,10 @@ public class Filters{
 			
 			// create image canvas
 			Bitmap none = Bitmap.createBitmap(bmp);
+			Bitmap mutableBitmap = none.copy(Bitmap.Config.ARGB_8888, true);
 			
-			Canvas canvas = new Canvas(none);
-			canvas.drawBitmap(none,0,0,null);
+			Canvas canvas = new Canvas(mutableBitmap);
+			canvas.drawBitmap(mutableBitmap,0,0,null);
 			
 			Paint paint = new Paint();
 		    ColorMatrix cm = new ColorMatrix();
@@ -466,7 +473,7 @@ public class Filters{
 		            0, 0, 0, 1, 0 });
 		    paint.setColorFilter(new ColorMatrixColorFilter(cm));
 		    Matrix matrix = new Matrix();
-		    canvas.drawBitmap(none, matrix, paint);
+		    canvas.drawBitmap(mutableBitmap, matrix, paint);
 		    
 		    // BORDER
 		    
@@ -481,7 +488,7 @@ public class Filters{
 			
 				// OUTPUT STREAM
 		       	FileOutputStream out = new FileOutputStream(NBBfile);
-		       	none.compress(Bitmap.CompressFormat.JPEG, 100, out);
+		       	mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 		       	out.flush();
            		out.close();
 				
