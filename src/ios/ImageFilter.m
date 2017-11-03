@@ -13,6 +13,7 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
 */
 
 #import "ImageFilter.h"
+#import "ImageFilters.h"
 
 #import <UIKit/UIKit.h>
 #import <CoreImage/CoreImage.h>
@@ -139,7 +140,7 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
 	// get file path
 	NSString *filePath = [options objectForKey:@"image"];
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *oDocumentsPath = [paths objectAtIndex:0];
+    NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
 	oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
 	
 	// convert file path to imageurl
@@ -163,46 +164,20 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
                         nil];
     
     CIImage *outputImageB = [filterB outputImage];
-    
-    // convert the filtered image to a UIImage
-    CGImageRef cgimg = [context createCGImage:outputImageB fromRect:[outputImageB extent]];
-    UIImage *newImg = [UIImage imageWithCGImage:cgimg];
-    
-	// store the file in the docs directory
-	NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
-	NSString *documentsPath = [paths objectAtIndex:0];
-	
-    int r = arc4random() % 5000;
-	NSString *random = [NSString stringWithFormat:@"%d", r];
-	NSString *tPathA = [documentsPath stringByAppendingPathComponent:@"stark"];
-	NSString *tPathB = [tPathA stringByAppendingString:random];
-	NSString *filePathB = [tPathB stringByAppendingString:@".jpg"];
-    
-    [imageData writeToFile:filePathB atomically:YES];
-    
-	// save the file if requested
-    NSString *save = [options objectForKey:@"save"];
-    if([save isEqualToString:@"true"]){
-        UIImageWriteToSavedPhotosAlbum(newImg, nil, nil, nil);
-    }
-	
-	//release the image
-    CGImageRelease(cgimg);
-    
-	//callback with path
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:filePathB];
-	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+    [self finishAndReturnByType:@"stark" finishCommand:command contextByPass:context editingImage:outputImageB];
 }
+
 -(void)sunnySide:(CDVInvokedUrlCommand*)command;
 {
 	// get options
 	NSMutableDictionary* options = [command.arguments objectAtIndex:0];
 
 	// get file path
-	NSString *filePath = [options objectForKey:@"image"];
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *oDocumentsPath = [paths objectAtIndex:0];
-	oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+    NSString *filePath = [options objectForKey:@"image"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+    oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
 	
 	// convert file path to imageurl
 	NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
@@ -224,36 +199,10 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
                         @"inputTargetNeutral",[CIVector vectorWithX:4000 Y:0 Z:0],
                         nil];
     CIImage *outputImageB = [filterB outputImage];
-    
-    // convert the filtered image to a UIImage
-    CGImageRef cgimg = [context createCGImage:outputImageB fromRect:[outputImageB extent]];
-    UIImage *newImg = [UIImage imageWithCGImage:cgimg];
-    
-	// store the file in the docs directory
-	NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
-	NSString *documentsPath = [paths objectAtIndex:0];
-	
-    int r = arc4random() % 5000;
-	NSString *random = [NSString stringWithFormat:@"%d", r];
-	NSString *tPathA = [documentsPath stringByAppendingPathComponent:@"sunnyside"];
-	NSString *tPathB = [tPathA stringByAppendingString:random];
-	NSString *filePathB = [tPathB stringByAppendingString:@".jpg"];
-    
-    [imageData writeToFile:filePathB atomically:YES];
-    
-	// save the file if requested
-    NSString *save = [options objectForKey:@"save"];
-    if([save isEqualToString:@"true"]){
-        UIImageWriteToSavedPhotosAlbum(newImg, nil, nil, nil);
-    }
-	
-	//release the image
-    CGImageRelease(cgimg);
-    
-	//callback with path
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:filePathB];
-	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+    [self finishAndReturnByType:@"sunnySide" finishCommand:command contextByPass:context editingImage:outputImageB];
 }
+
 -(void)worn:(CDVInvokedUrlCommand*)command;
 {
 	// get options
@@ -262,7 +211,7 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
 	// get file path
 	NSString *filePath = [options objectForKey:@"image"];
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *oDocumentsPath = [paths objectAtIndex:0];
+	NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
 	oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
 	
 	// convert file path to imageurl
@@ -291,46 +240,20 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
                          @"inputTargetNeutral",[CIVector vectorWithX:5200 Y:0 Z:0],
                          nil];
     CIImage *outputImageC = [filterC outputImage];
-    
-    // convert the filtered image to a UIImage
-    CGImageRef cgimg = [context createCGImage:outputImageC fromRect:[outputImageC extent]];
-    UIImage *newImg = [UIImage imageWithCGImage:cgimg];
-    
-	// store the file in the docs directory
-	NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
-	NSString *documentsPath = [paths objectAtIndex:0];
-	
-    int r = arc4random() % 5000;
-	NSString *random = [NSString stringWithFormat:@"%d", r];
-	NSString *tPathA = [documentsPath stringByAppendingPathComponent:@"worn"];
-	NSString *tPathB = [tPathA stringByAppendingString:random];
-	NSString *filePathB = [tPathB stringByAppendingString:@".jpg"];
-    
-    [imageData writeToFile:filePathB atomically:YES];
-    
-	// save the file if requested
-    NSString *save = [options objectForKey:@"save"];
-    if([save isEqualToString:@"true"]){
-        UIImageWriteToSavedPhotosAlbum(newImg, nil, nil, nil);
-    }
-	
-	//release the image
-    CGImageRelease(cgimg);
-    
-	//callback with path
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:filePathB];
-	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+    [self finishAndReturnByType:@"worn" finishCommand:command contextByPass:context editingImage:outputImageC];
 }
+
 -(void)vintage:(CDVInvokedUrlCommand*)command;
 {
 	// get options
 	NSMutableDictionary* options = [command.arguments objectAtIndex:0];
 
 	// get file path
-	NSString *filePath = [options objectForKey:@"image"];
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *oDocumentsPath = [paths objectAtIndex:0];
-	oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+    NSString *filePath = [options objectForKey:@"image"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+    oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
 	
 	// convert file path to imageurl
 	NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
@@ -352,34 +275,230 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
                          @"inputContrast", [NSNumber numberWithFloat:1.1], 
                          nil];
     CIImage *outputImageB = [filterB outputImage];
-    
+
+    [self finishAndReturnByType:@"vintage" finishCommand:command contextByPass:context editingImage:outputImageB];
+}
+
+-(void)blackAndWhite:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath]; 
+
+  [self applyFilterAndReturnByType:@"blackAndWhite" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)blueMood:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"blueMood" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)sunkissed:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"sunkissed" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)magichour:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"magichour" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)toycamera:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"toycamera" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)sharpify:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"sharpify" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)vibrant:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"vibrant" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)colorize:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath];  
+
+  UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  [self applyFilterAndReturnByType:@"colorize" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)crossProcess:(CDVInvokedUrlCommand*)command;
+{
+  // get options
+  NSMutableDictionary* options = [command.arguments objectAtIndex:0];
+
+  // get file path
+  NSString *filePath = [options objectForKey:@"image"];
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *oDocumentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+  oDocumentsPath = [oDocumentsPath stringByAppendingString:filePath];
+  
+  // convert file path to imageurl
+  NSURL *fileNameAndPath = [NSURL fileURLWithPath:oDocumentsPath]; 
+
+  [self applyFilterAndReturnByType:@"crossProcess" finishCommand:command editingImagePath:fileNameAndPath];
+}
+
+-(void)applyFilterAndReturnByType:(NSString*)type finishCommand:(CDVInvokedUrlCommand*)command editingImagePath:(NSURL*)fileNameAndPath {
+  // CIImage *beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
+  // CIContext *context = [CIContext contextWithOptions:nil];
+  // CGImageRef cgimg = [context createCGImage:beginImage fromRect:[beginImage extent]];
+  UIImage *newImg = [UIImage imageWithData:[NSData dataWithContentsOfURL:fileNameAndPath]];
+
+  SEL typeAsFunc = NSSelectorFromString(type);
+  newImg = [newImg performSelector:typeAsFunc];
+  // newImg = [newImg blackAndWhite];
+
+  // store the file in the docs directory
+  NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
+  NSString *documentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+
+  int r = arc4random() % 5000;
+  NSString *random = [NSString stringWithFormat:@"%d", r];
+  NSString *fileNameB = [type stringByAppendingString:random];
+  NSString *fileName = [fileNameB stringByAppendingString:@".jpg"];
+  NSString *tPathA = [documentsPath stringByAppendingPathComponent:type];
+  NSString *tPathB = [tPathA stringByAppendingString:random];
+  NSString *filePathB = [tPathB stringByAppendingString:@".jpg"];
+
+  [imageData writeToFile:filePathB atomically:YES];
+
+  //callback with path
+  CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fileName];
+  [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+-(void)finishAndReturnByType:(NSString*)type finishCommand:(CDVInvokedUrlCommand*)command contextByPass:(CIContext*)context editingImage:(CIImage*)outputImage {
     // convert the filtered image to a UIImage
-    CGImageRef cgimg = [context createCGImage:outputImageB fromRect:[outputImageB extent]];
+    CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
     UIImage *newImg = [UIImage imageWithCGImage:cgimg];
     
-	// store the file in the docs directory
-	NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
-	NSString *documentsPath = [paths objectAtIndex:0];
-	
+    // store the file in the docs directory
+    NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
+    NSString *documentsPath = [NSTemporaryDirectory()stringByStandardizingPath];
+
     int r = arc4random() % 5000;
-	NSString *random = [NSString stringWithFormat:@"%d", r];
-	NSString *tPathA = [documentsPath stringByAppendingPathComponent:@"vintage"];
-	NSString *tPathB = [tPathA stringByAppendingString:random];
-	NSString *filePathB = [tPathB stringByAppendingString:@".jpg"];
-    
+    NSString *random = [NSString stringWithFormat:@"%d", r];
+    NSString *fileNameB = [type stringByAppendingString:random];
+    NSString *fileName = [fileNameB stringByAppendingString:@".jpg"];
+    NSString *tPathA = [documentsPath stringByAppendingPathComponent:type];
+    NSString *tPathB = [tPathA stringByAppendingString:random];
+    NSString *filePathB = [tPathB stringByAppendingString:@".jpg"];
+
     [imageData writeToFile:filePathB atomically:YES];
-    
-	// save the file if requested
-    NSString *save = [options objectForKey:@"save"];
-    if([save isEqualToString:@"true"]){
-        UIImageWriteToSavedPhotosAlbum(newImg, nil, nil, nil);
-    }
-	
-	//release the image
+
+    //release the image
     CGImageRelease(cgimg);
-    
-	//callback with path
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:filePathB];
-	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+    //callback with path
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fileName];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 @end
