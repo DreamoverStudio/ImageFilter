@@ -76,58 +76,58 @@ Copyright (c) 2012 Drew Dahlman MIT LICENSE
 -(void)none:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
     // Start by getting path to image
-    NSString *filePath = [options objectForKey:@"image"];
-    // CREATE NSURL
-    NSURL *fileNameAndPath = [NSURL URLWithString:filePath];
-    NSLog(@"FILE PATH: %@",fileNameAndPath);
+    // NSString *filePath = [options objectForKey:@"image"];
+    // // CREATE NSURL
+    // NSURL *fileNameAndPath = [NSURL URLWithString:filePath];
+    // NSLog(@"FILE PATH: %@",fileNameAndPath);
     
-    // DEFINE OUR CIImage
-    CIImage *beginImage = 
-    [CIImage imageWithContentsOfURL:fileNameAndPath];
-    CIContext *context = [CIContext contextWithOptions:nil];
+    // // DEFINE OUR CIImage
+    // CIImage *beginImage = 
+    // [CIImage imageWithContentsOfURL:fileNameAndPath];
+    // CIContext *context = [CIContext contextWithOptions:nil];
     
-    // DO ALL MODIFICATIONS HERE.
+    // // DO ALL MODIFICATIONS HERE.
     
     
-    // CREATE CIIMageRef from our CIImage
-    // Be sure to reference the correct CIImage in both the createCGIImage and fromRect
-    CGImageRef cgimg = 
-    [context createCGImage:beginImage fromRect:[beginImage extent]];
+    // // CREATE CIIMageRef from our CIImage
+    // // Be sure to reference the correct CIImage in both the createCGIImage and fromRect
+    // CGImageRef cgimg = 
+    // [context createCGImage:beginImage fromRect:[beginImage extent]];
     
-    // CREATE UIImage out of CIImage
-    UIImage *newImg = [UIImage imageWithCGImage:cgimg];
+    // // CREATE UIImage out of CIImage
+    // UIImage *newImg = [UIImage imageWithCGImage:cgimg];
     
-    // GET IMAGE DATA AND CONSTRUCT URL TO THE APPS DOCUMENT FOLDER
-    NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
-    NSString *documentsPath = [paths objectAtIndex:0]; 
-    NSString *filePathB = [documentsPath stringByAppendingPathComponent:@"none.jpg"]; 
+    // // GET IMAGE DATA AND CONSTRUCT URL TO THE APPS DOCUMENT FOLDER
+    // NSData *imageData = UIImageJPEGRepresentation(newImg,1.0);
+    // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  
+    // NSString *documentsPath = [paths objectAtIndex:0]; 
+    // NSString *filePathB = [documentsPath stringByAppendingPathComponent:@"none.jpg"]; 
     
-    // SAVE IMAGE DATA TO DOCUMENTS FOLDER
-    [imageData writeToFile:filePathB atomically:YES];
+    // // SAVE IMAGE DATA TO DOCUMENTS FOLDER
+    // [imageData writeToFile:filePathB atomically:YES];
     
-    // CHECK IF THE SAVE KEY IS SET TO TRU
-    NSString *save = [options objectForKey:@"save"];
-    NSLog(@"SAVED: %@",save);
+    // // CHECK IF THE SAVE KEY IS SET TO TRU
+    // NSString *save = [options objectForKey:@"save"];
+    // NSLog(@"SAVED: %@",save);
     
-    // IF TRUE THEN SAVE IMAGE TO CAMERA ROLL
-    if([save isEqualToString:@"true"]){
-        UIImageWriteToSavedPhotosAlbum(newImg, nil, nil, nil);
-    }
+    // // IF TRUE THEN SAVE IMAGE TO CAMERA ROLL
+    // if([save isEqualToString:@"true"]){
+    //     UIImageWriteToSavedPhotosAlbum(newImg, nil, nil, nil);
+    // }
     
-    // RELEASE OUR IMAGE AND DONE
-    CGImageRelease(cgimg);
+    // // RELEASE OUR IMAGE AND DONE
+    // CGImageRelease(cgimg);
     
-    // CALLBACK TO JAVASCRIPT WITH IMAGE URI
-    self.callbackID = [arguments pop];
+    // // CALLBACK TO JAVASCRIPT WITH IMAGE URI
+    // self.callbackID = [arguments pop];
     
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
-                                                messageAsString:filePathB];
+    // CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK 
+    //                                             messageAsString:filePathB];
     
-    /* Create JS to call the success function with the result */
-    NSString *successScript = [pluginResult toSuccessCallbackString:self.callbackID];
-    /* Output the script */
-    [self writeJavascript:successScript];
+    // /* Create JS to call the success function with the result */
+    // NSString *successScript = [pluginResult toSuccessCallbackString:self.callbackID];
+    // /* Output the script */
+    // [self writeJavascript:successScript];
 
     
     
